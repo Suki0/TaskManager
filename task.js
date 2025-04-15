@@ -1,7 +1,7 @@
 //imports file system module
 const fs = require('fs')
 
-//grabs readline module
+//grabs readline modulea
 const readline = require('node:readline');
 
 //creates the input and output terminal for user input
