@@ -27,27 +27,34 @@ if (fs.existsSync(filepath)) {
           console.error('Error writing file:', err);
         } else {
           console.log('File created successfully!');
-        }
+        };
 
       });
    
+  };
+
+
+rl.question("",(input) =>{
+  switch(input){
+    case "add":
+      
+      rl.question("What is the description of the task?", (taskDesc) =>{ //flip the questions to name first and task after
+        rl.question("What would you like to name the task", (taskName)=>{
+          const data ={
+            "Desc": taskDesc,
+            "Name": taskName,
+          }
+          
+          fileString = JSON.stringify(data,null,2)
+          fs.writeFile(filepath,fileString, (err) =>{
+            if(err){
+              console.log(`${err}`)
+            }
+          })
+        
+        })
+      })
   }
-
-
-//fetches content of the JSON data
-function read_file(){
-}
-
-
-rl.question('what is your name?', (userName)=>{
-  const userData = {'name': userName}
-  const jsonString = JSON.stringify(userData, null, 2)
-  fs.writeFile(filepath,jsonString, (err)=>{
-   if(err){
-    console.log(err)
-   } else{
-    console.log("success!")
-   }
-  })
-  console.log(userData.name)
 })
+
+
