@@ -9,17 +9,16 @@ const rl = readline.createInterface({
 });
 
 // Define the file path
-const filepath = 'C:/Users/AVENg/Desktop/task/taskDB.json'; 
+const filepath = 'taskDB.json'; 
 
 // Check if the file exists
 if (fs.existsSync(filepath)) {
   console.log(`${filepath} exists.`);
-  rl.close();
+  
 } else {
   console.log(`${filepath} does not exist.`);
 
-  rl.question('Do you want me to create this file for you? (Y/N): ', (answer) => {
-    if (answer.toUpperCase() === 'Y') {
+ 
       const emptyData = {};
       const jsonString = JSON.stringify(emptyData, null, 2);
 
@@ -29,11 +28,26 @@ if (fs.existsSync(filepath)) {
         } else {
           console.log('File created successfully!');
         }
-        rl.close(); // Always close readline idiot
+
       });
-    } else {
-      console.log('File not created.');
-      rl.close();
-    }
-  });
+   
+  }
+
+
+//fetches content of the JSON data
+function read_file(){
 }
+
+
+rl.question('what is your name?', (userName)=>{
+  const userData = {'name': userName}
+  const jsonString = JSON.stringify(userData, null, 2)
+  fs.writeFile(filepath,jsonString, (err)=>{
+   if(err){
+    console.log(err)
+   } else{
+    console.log("success!")
+   }
+  })
+  console.log(userData.name)
+})
